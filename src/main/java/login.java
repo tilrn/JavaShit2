@@ -11,6 +11,7 @@ public class login {
     private JTextField textField1;
     private JTextField textField2;
     private JButton button1;
+    private JComboBox comboBox1;
 
     public login()
     {
@@ -21,19 +22,17 @@ public class login {
         frame.setSize(300, 150);
         frame.setVisible(true);
 
-        //setActionListeners();
+        setActionListeners();
 
 
     }
 
-   /* private void setActionListeners()
+    private void setActionListeners()
     {
-        prijavaButton.addActionListener(e -> {
-
-
-        });
+        button1.addActionListener(e -> {  new login();      });
 
     }
-*/
+
+
 }
 
