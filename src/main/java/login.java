@@ -29,8 +29,7 @@ public class login {
 
     private void setActionListeners()
     {
-        button1.addActionListener(e -> {  new login();      });
-
+        button1.addActionListener(e -> {   Baza.SelectKraji();     });
     }
 
 
