@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 
+
 public class Baza {
 
 
-    private static Connection connect() {
+    public static Connection connect() {
         Connection con = null;
         try
         {
@@ -22,7 +23,7 @@ public class Baza {
     }
     public static ArrayList<String> SelectKraji()
     {
-        String com = "SELECT name FROM locations";
+        String com = "SELECT ime FROM kraji";
         ArrayList<String> locations = new ArrayList<String>();
 
         try (Connection con = connect();
@@ -45,7 +46,7 @@ public class Baza {
     }
     public static boolean SelectLogin(String email_, String pass_)
     {
-        String com = "SELECT email, passwordd FROM musicians WHERE (email='" + email_ + "') AND (passwordd='" + pass_ + "');";
+        String com = "SELECT mail, geslo FROM muzikanti WHERE (mail='" + email_ + "') AND (geslo='" + pass_ + "');";
         boolean potrditev = false;
 
         try (Connection con = connect();
@@ -68,4 +69,56 @@ public class Baza {
         }
         return potrditev;
     }
+    public static boolean registracija(String ime,String priimek, String email, String pass) {
+        String com = "SELECT ('" + ime + "','" + email + "','" + pass + "','" + priimek + "')";
+        boolean ok = true;
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(com)){
+
+            while (rez.next()) {
+                ok = rez.getBoolean(1);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("registracija() napaka " + e);
+        }
+        return ok;
+
+    }
+    public static void InsertOglas(String imee, String opiss)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("INSERT INTO oglasi(ime, opis) VALUES('" + imee + "','" +  opiss + "');");
+        }
+        catch (SQLException e) {
+
+            System.out.println("InsertOglas " + e );
+        }
+    }
+    public static ArrayList<String> SkupineIzpis()
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT id, ime FROM skupine;";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(2);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
+
 }

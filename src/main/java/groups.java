@@ -29,25 +29,42 @@ import javax.swing.Renderer;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class HomePage{
-    private JButton narediOglasButton;
-    private JList list1;
-    private JPanel HomePage;
-    private JButton pridruziSkupiniButton;
-    private JButton ustvariSkupinoButton;
+
+public class groups {
+    private JTextField textField1;
+    private JTextField textField2;
+    private JButton dodajOglas;
+    private JPanel content;
+    private JLabel naslov;
+    private JLabel opis;
+    private JLabel adsa;
 
 
-    public HomePage()
+    public groups()
     {
         JFrame frame = new JFrame("Login");
-        frame.setContentPane(HomePage);
+        frame.setContentPane(content);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(800, 750);
+        frame.setSize(300, 150);
         frame.setVisible(true);
 
-        //setActionListeners();
+        setActionListeners();
 
 
+    }
+
+
+    private void setActionListeners()
+    {
+
+        dodajOglas.addActionListener(e -> {
+            String ime = textField1.getText();
+            String opis = textField2.getText();
+
+            Baza.InsertOglas(ime, opis);
+
+
+        });
     }
 }
