@@ -29,7 +29,7 @@ public class login {
 
     private void setActionListeners()
     {
-        button1.addActionListener(e -> {   Baza.SelectKraji();     });
+        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("dela"); }else {new HomePage();};   });
     }
 
 
