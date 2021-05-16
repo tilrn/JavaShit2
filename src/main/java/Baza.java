@@ -833,6 +833,27 @@ public class Baza {
         }
         return id_muzikanta;
     }
+    public static int IDmuzikantanulladmin(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT id FROM muzikanti WHERE id = '"+ idu +"'AND skupina_id IS not null AND adminu=1 ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
+    }
 
 
 }
