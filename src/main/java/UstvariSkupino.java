@@ -22,15 +22,16 @@ public class UstvariSkupino {
     private JButton Delete5;
     private JButton Delete6;
     private JButton koncaj;
-    private JLabel clan6;
+    private JButton DeleteClani;
+
 
     public UstvariSkupino()
     {
         JFrame frame = new JFrame("Ustvari skupino");
         frame.setContentPane(ustvariSkupino);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setSize(500, 300);
+        frame.setSize(600, 400);
         frame.setVisible(true);
 
         setActionListeners();
@@ -42,13 +43,10 @@ public class UstvariSkupino {
         clan3.setVisible(false);
         clan4.setVisible(false);
         clan5.setVisible(false);
-        clan6.setVisible(false);
-        Delete1.setVisible(false);
-        Delete2.setVisible(false);
-        Delete3.setVisible(false);
-        Delete4.setVisible(false);
-        Delete5.setVisible(false);
-        Delete6.setVisible(false);
+        DeleteClani.setVisible(false);
+        koncaj.setVisible(false);
+
+        
 
         DefaultComboBoxModel mod = new DefaultComboBoxModel();
         mod.addAll(Baza.SelectKraji());
@@ -66,13 +64,18 @@ public class UstvariSkupino {
 
 
     }
-
-
+    public void zakluci(){
+        new HomePage();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ustvariSkupino);
+        frame.dispose();
+    }
+    public int i = 0;
+    public String ime;
     private void setActionListeners()
     {
         ustvariSkupinoButton.addActionListener(e -> {
 
-            String ime = textField1.getText();
+            ime = textField1.getText();
             String ops = textField2.getText();
             String ime_kraja = KrajCombo.getSelectedItem().toString();
             String zvrst = zvrstCombo.getSelectedItem().toString();
@@ -87,70 +90,122 @@ public class UstvariSkupino {
             clan3.setVisible(true);
             clan4.setVisible(true);
             clan5.setVisible(true);
-            clan6.setVisible(true);
+            DeleteClani.setVisible(true);
+            koncaj.setVisible(true);
+
             textField1.disable();
             textField2.disable();
             KrajCombo.disable();
             zvrstCombo.disable();
             ustvariSkupinoButton.setVisible(false);
-            Delete1.setVisible(true);
-            Delete2.setVisible(true);
-            Delete3.setVisible(true);
-            Delete4.setVisible(true);
-            Delete5.setVisible(true);
-            Delete6.setVisible(true);
-        });
-        Delete1.addActionListener(e -> {
-
-            clan1.setText("-----");
 
         });
-        Delete2.addActionListener(e -> {
-
-            clan2.setText("-----");
-
-        });
-        Delete3.addActionListener(e -> {
-
-            clan3.setText("-----");
-
-        });
-        Delete4.addActionListener(e -> {
-
-            clan4.setText("-----");
-
-        });
-        Delete5.addActionListener(e -> {
-            clan5.setText("-----");
-        });
-        Delete6.addActionListener(e -> {
-            clan6.setText("-----");
-        });
-
         koncaj.addActionListener(e -> {
+            int ID_skupine = Baza.IDskupine(ime);
+            System.out.println(ID_skupine);
             if(clan1.getText() != "-----"){
 
+                String str = clan1.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                System.out.println(ime);
+                System.out.println(priimek);
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
             }
+            if(clan2.getText() != "-----"){
+                String str = clan2.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+
+            }
+            if(clan3.getText() != "-----"){
+                String str = clan3.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+
+            }
+            if(clan4.getText() != "-----"){
+                String str = clan4.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+
+            }
+            if(clan5.getText() != "-----"){
+                String str = clan5.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+
+            }
+            zakluci();
 
         });
         dodajButton.addActionListener(e -> {
-            Integer i=0;
-            if (i<1)
+
+            if (i==0)
             {
-                String clan=claniCombo.getSelectedItem().toString();
+                String clan = claniCombo.getSelectedItem().toString();
                 clan1.setText(clan);
-                i = i + 1;
                 claniCombo.setSelectedIndex(-1);
+                claniCombo.removeItem(clan);
+
             }
-            if (i<2)
+            if (i==1)
             {
                 String clan1=claniCombo.getSelectedItem().toString();
                 clan2.setText(clan1);
-                i++;
-                claniCombo.setSelectedIndex(-1);
-            }
 
+                claniCombo.setSelectedIndex(-1);
+                claniCombo.removeItem(clan1);
+            }
+            if (i==2)
+            {
+                String clan1=claniCombo.getSelectedItem().toString();
+                clan3.setText(clan1);
+
+                claniCombo.setSelectedIndex(-1);
+                claniCombo.removeItem(clan1);
+            }
+            if (i==3)
+            {
+                String clan1=claniCombo.getSelectedItem().toString();
+                clan4.setText(clan1);
+
+                claniCombo.setSelectedIndex(-1);
+                claniCombo.removeItem(clan1);
+            }
+            if (i==4)
+            {
+                String clan1=claniCombo.getSelectedItem().toString();
+                clan5.setText(clan1);
+
+                claniCombo.setSelectedIndex(-1);
+                claniCombo.removeItem(clan1);
+            }
+            i++;
         } );
+
+        DeleteClani.addActionListener(e -> {
+            clan1.setText("-----");
+            clan2.setText("-----");
+            clan3.setText("-----");
+            clan4.setText("-----");
+            clan5.setText("-----");
+            DefaultComboBoxModel mod3 = new DefaultComboBoxModel();
+            mod3.addAll(Baza.ClaniIzpis());
+            claniCombo.setModel(mod3);
+            i =0;
+
+        });
+
     } ;
 
     }

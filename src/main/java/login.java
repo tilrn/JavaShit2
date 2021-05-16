@@ -25,10 +25,15 @@ public class login {
 
 
     }
+    public void zakluci(){
+        new HomePage();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(login);
+        frame.dispose();
+    }
 
     private void setActionListeners()
     {
-        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("ni pravilno geslo"); }else {new HomePage();};   });
+        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("ni pravilno geslo"); }else {zakluci();};   });
     }
 
 
