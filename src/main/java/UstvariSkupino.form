@@ -54,13 +54,13 @@
           <text value="Kraj"/>
         </properties>
       </component>
-      <component id="401b6" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+      <component id="401b6" class="javax.swing.JComboBox" binding="zvrstCombo">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
-      <component id="b1e7a" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+      <component id="b1e7a" class="javax.swing.JComboBox" binding="claniCombo">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

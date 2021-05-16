@@ -122,7 +122,7 @@ public class Baza {
     }
     public static ArrayList<String> ZvrstiIzpis()
     {
-        ArrayList<String> casi = new ArrayList<>();
+        ArrayList<String> zvrsti = new ArrayList<>();
         String comm = "SELECT id, ime FROM zvrsti;";
         String cas;
 
@@ -131,20 +131,20 @@ public class Baza {
              ResultSet rez = stat.executeQuery(comm)) {
 
             while (rez.next()) {
-                String m = rez.getString(2);
-                casi.add(m);
+                String zvr = rez.getString(2);
+                zvrsti.add(zvr);
             }
 
         } catch (SQLException e) {
 
             System.out.println("SelectZvrsti() napaka " + e);
         }
-        return casi;
+        return zvrsti;
     }
     public static ArrayList<String> ClaniIzpis()
     {
         ArrayList<String> casi = new ArrayList<>();
-        String comm = "SELECT id, ime FROM muzikanti;";
+        String comm = "SELECT id, ime, priimek FROM muzikanti;";
         String cas;
 
         try (Connection con = connect();
@@ -153,6 +153,8 @@ public class Baza {
 
             while (rez.next()) {
                 String m = rez.getString(2);
+                m += " ";
+                m += rez.getString(3);
                 casi.add(m);
             }
 
