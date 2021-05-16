@@ -43,12 +43,7 @@ public class UstvariSkupino {
         clan4.setVisible(false);
         clan5.setVisible(false);
         clan6.setVisible(false);
-        Delete1.setVisible(false);
-        Delete2.setVisible(false);
-        Delete3.setVisible(false);
-        Delete4.setVisible(false);
-        Delete5.setVisible(false);
-        Delete6.setVisible(false);
+        
 
         DefaultComboBoxModel mod = new DefaultComboBoxModel();
         mod.addAll(Baza.SelectKraji());
@@ -93,40 +88,8 @@ public class UstvariSkupino {
             KrajCombo.disable();
             zvrstCombo.disable();
             ustvariSkupinoButton.setVisible(false);
-            Delete1.setVisible(true);
-            Delete2.setVisible(true);
-            Delete3.setVisible(true);
-            Delete4.setVisible(true);
-            Delete5.setVisible(true);
-            Delete6.setVisible(true);
-        });
-        Delete1.addActionListener(e -> {
-
-            clan1.setText("-----");
 
         });
-        Delete2.addActionListener(e -> {
-
-            clan2.setText("-----");
-
-        });
-        Delete3.addActionListener(e -> {
-
-            clan3.setText("-----");
-
-        });
-        Delete4.addActionListener(e -> {
-
-            clan4.setText("-----");
-
-        });
-        Delete5.addActionListener(e -> {
-            clan5.setText("-----");
-        });
-        Delete6.addActionListener(e -> {
-            clan6.setText("-----");
-        });
-
         koncaj.addActionListener(e -> {
             if(clan1.getText() != "-----"){
 
@@ -135,14 +98,14 @@ public class UstvariSkupino {
         });
         dodajButton.addActionListener(e -> {
             Integer i=0;
-            if (i<1)
+            if (i==0)
             {
                 String clan=claniCombo.getSelectedItem().toString();
                 clan1.setText(clan);
                 i = i + 1;
-                claniCombo.setSelectedIndex(-1);
+
             }
-            if (i<2)
+            if (i==1)
             {
                 String clan1=claniCombo.getSelectedItem().toString();
                 clan2.setText(clan1);
