@@ -162,5 +162,18 @@ public class Baza {
         }
         return casi;
     }
+    public static void insertMuzikant(String imee, String priimek, String maill, String gesloo,String krajj)
+    {
+        System.out.println("SelectKraji() napaka "+krajj);
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("INSERT INTO muzikanti(ime, priimek,mail,geslo,kraj_id) VALUES('" + imee + "','" +  priimek + "','"+maill+"','"+gesloo+"',(SELECT id FROM kraji WHERE LOWER(ime) = LOWER('"+krajj+"')))");
+        }
+        catch (SQLException e) {
+
+            System.out.println("InsertOglas " + e );
+        }
+    }
 
 }

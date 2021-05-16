@@ -11,7 +11,6 @@ public class login {
     private JTextField textField1;
     private JTextField textField2;
     private JButton button1;
-    private JComboBox comboBox1;
 
     public login()
     {
@@ -29,7 +28,7 @@ public class login {
 
     private void setActionListeners()
     {
-        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("dela"); }else {new HomePage();};   });
+        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("ni pravilno geslo"); }else {new HomePage();};   });
     }
 
 
