@@ -32,11 +32,12 @@ public class SelectedOglas {
 
 
         SendInvite.addActionListener(e -> {
+        new PridruziSkupini();
 
         });
 
 
-    }
+    };
 
 
 
