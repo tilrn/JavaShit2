@@ -29,7 +29,7 @@ public class UstvariSkupino {
     {
         JFrame frame = new JFrame("Ustvari skupino");
         frame.setContentPane(ustvariSkupino);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setSize(600, 400);
         frame.setVisible(true);
@@ -64,13 +64,18 @@ public class UstvariSkupino {
 
 
     }
+    public void zakluci(){
+        new HomePage();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ustvariSkupino);
+        frame.dispose();
+    }
     public int i = 0;
-
+    public String ime;
     private void setActionListeners()
     {
         ustvariSkupinoButton.addActionListener(e -> {
 
-            String ime = textField1.getText();
+            ime = textField1.getText();
             String ops = textField2.getText();
             String ime_kraja = KrajCombo.getSelectedItem().toString();
             String zvrst = zvrstCombo.getSelectedItem().toString();
@@ -96,21 +101,51 @@ public class UstvariSkupino {
 
         });
         koncaj.addActionListener(e -> {
+            int ID_skupine = Baza.IDskupine(ime);
+            System.out.println(ID_skupine);
             if(clan1.getText() != "-----"){
 
+                String str = clan1.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                System.out.println(ime);
+                System.out.println(priimek);
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
             }
             if(clan2.getText() != "-----"){
+                String str = clan2.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
 
             }
             if(clan3.getText() != "-----"){
+                String str = clan3.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
 
             }
             if(clan4.getText() != "-----"){
+                String str = clan4.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
 
             }
             if(clan5.getText() != "-----"){
+                String str = clan5.getText();
+                String[] random = str.split(" ", 5);
+                String ime = random[0];
+                String priimek = random[1];
+                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
 
             }
+            zakluci();
 
         });
         dodajButton.addActionListener(e -> {
@@ -167,6 +202,7 @@ public class UstvariSkupino {
             DefaultComboBoxModel mod3 = new DefaultComboBoxModel();
             mod3.addAll(Baza.ClaniIzpis());
             claniCombo.setModel(mod3);
+            i =0;
 
         });
 

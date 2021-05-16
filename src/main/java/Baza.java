@@ -723,17 +723,39 @@ public class Baza {
         }
 
     }
-    public static void InsertUporabnikSkupina(String ime, String opis)
+    public static void InsertUporabnikSkupina(String imee,String priimekk,  int id_skup)
     {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("INSERT INTO znamke(ime_z, opis_z) VALUES('" + ime + "','" +  opis + "');");
+            stat.executeUpdate("UPDATE muzikanti SET skupina_id = "+id_skup+" WHERE ime = '"+imee+"' AND priimek = '"+priimekk+"' ");
         }
         catch (SQLException e) {
 
             System.out.println("InsertZnamka napaka " + e );
         }
+    }
+
+    public static int IDskupine(String imee)
+    {
+        int id_skup = 0;
+        String comm = "SELECT id FROM skupine WHERE ime = '"+ imee +"';";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skup = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skup;
     }
 
 
