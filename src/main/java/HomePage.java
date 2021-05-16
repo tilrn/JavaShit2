@@ -35,25 +35,31 @@ public class HomePage{
     private JPanel HomePage;
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
+    public int idu=0;
 
-
-    public HomePage()
+    public HomePage(int idmuzikanta)
     {
+        idu=idmuzikanta;
+        System.out.println(idu);
         JFrame frame = new JFrame("Login");
         frame.setContentPane(HomePage);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(800, 750);
         frame.setVisible(true);
-
+        ustvariSkupinoButton.setVisible(false);
         setActionListeners();
+        int i=Baza.IDmuzikantanull(idu);
+        if(i>0){
+            ustvariSkupinoButton.setVisible(true);
+        }
 
 
     }
     private void setActionListeners()
     {
         ustvariSkupinoButton.addActionListener(e -> {
-            new UstvariSkupino();
+            new UstvariSkupino(idu);
         });
     }
 }

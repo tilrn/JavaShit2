@@ -24,9 +24,13 @@ public class UstvariSkupino {
     private JButton koncaj;
     private JButton DeleteClani;
 
+    public int idu;
 
-    public UstvariSkupino()
+
+    public UstvariSkupino(int iduporabnika)
     {
+        idu=iduporabnika;
+        System.out.println(idu);
         JFrame frame = new JFrame("Ustvari skupino");
         frame.setContentPane(ustvariSkupino);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,6 +49,7 @@ public class UstvariSkupino {
         clan5.setVisible(false);
         DeleteClani.setVisible(false);
         koncaj.setVisible(false);
+
 
         
 
@@ -65,7 +70,7 @@ public class UstvariSkupino {
 
     }
     public void zakluci(){
-        new HomePage();
+        new HomePage(0);
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ustvariSkupino);
         frame.dispose();
     }
@@ -93,6 +98,7 @@ public class UstvariSkupino {
             DeleteClani.setVisible(true);
             koncaj.setVisible(true);
 
+
             textField1.disable();
             textField2.disable();
             KrajCombo.disable();
@@ -111,7 +117,7 @@ public class UstvariSkupino {
                 String priimek = random[1];
                 System.out.println(ime);
                 System.out.println(priimek);
-                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+                Baza.InsertUporabnikSkupinaadmin(ime,priimek,ID_skupine,idu);
             }
             if(clan2.getText() != "-----"){
                 String str = clan2.getText();
