@@ -120,5 +120,47 @@ public class Baza {
         }
         return casi;
     }
+    public static ArrayList<String> ZvrstiIzpis()
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT id, ime FROM zvrsti;";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(2);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("SelectZvrsti() napaka " + e);
+        }
+        return casi;
+    }
+    public static ArrayList<String> ClaniIzpis()
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT id, ime FROM muzikanti;";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(2);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("SelectZvrsti() napaka " + e);
+        }
+        return casi;
+    }
 
 }
