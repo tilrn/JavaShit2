@@ -48,10 +48,14 @@ public class HomePage{
         frame.setSize(800, 750);
         frame.setVisible(true);
         ustvariSkupinoButton.setVisible(false);
+        //narediOglasButton.setVisible(false);
+        //pridruziSkupiniButton.setVisible(false);
         setActionListeners();
         int i=Baza.IDmuzikantanull(idu);
         if(i>0){
             ustvariSkupinoButton.setVisible(true);
+            //narediOglasButton.setVisible(true);
+            pridruziSkupiniButton.setVisible(true);
         }
 
 
