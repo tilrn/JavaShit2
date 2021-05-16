@@ -31,7 +31,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class HomePage{
     private JButton narediOglasButton;
-    private JList list1;
+    private JList lista;
     private JPanel HomePage;
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
@@ -51,8 +51,8 @@ public class HomePage{
         narediOglasButton.setVisible(false);
         //pridruziSkupiniButton.setVisible(false);
         setActionListeners();
-        int i=Baza.IDmuzikantanull(idu);
-        if(i>0){
+        int in=Baza.IDmuzikantanull(idu);
+        if(in>0){
             ustvariSkupinoButton.setVisible(true);
 
 
@@ -69,6 +69,20 @@ public class HomePage{
             }
 
         }
+        ArrayList<String> i = Baza.IzpisOglasov();
+        DefaultListModel model = new DefaultListModel();
+
+
+        for (int st = 0;st<i.size();st++){
+            String temp = i.get(st);
+            String[] temp2 = temp.split(" ", 2);
+            String konec = temp2[0];
+            System.out.println(konec);
+            model.addElement(temp2[0]);
+
+
+        }
+        lista.setModel(model);
 
 
     }
@@ -77,5 +91,20 @@ public class HomePage{
         ustvariSkupinoButton.addActionListener(e -> {
             new UstvariSkupino(idu);
         });
+        lista.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("1");
+                super.mouseClicked(e);
+                System.out.println("2");
+                String selected = lista.getSelectedValue().toString();
+                System.out.println("3");
+                System.out.println(selected);
+                System.out.println("4");
+                new SelectedOglas(selected);
+
+            }
+        });
+
     }
 }
