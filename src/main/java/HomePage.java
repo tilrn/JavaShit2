@@ -31,10 +31,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class HomePage{
     private JButton narediOglasButton;
-    private JList list1;
+    private JList lista;
     private JPanel HomePage;
-    private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
+
+
+
+
 
 
     public HomePage()
@@ -49,11 +52,40 @@ public class HomePage{
         setActionListeners();
 
 
+
+
+        ArrayList<String> i = Baza.IzpisOglasov();
+        DefaultListModel model = new DefaultListModel();
+
+
+        for (int st = 0;st<i.size();st++){
+            String temp = i.get(st);
+            String[] temp2 = temp.split(" ", 2);
+            String konec = temp2[0];
+            System.out.println(konec);
+            model.addElement(temp2[0]);
+
+
+        }
+        lista.setModel(model);
+
+
     }
     private void setActionListeners()
     {
         ustvariSkupinoButton.addActionListener(e -> {
             new UstvariSkupino();
         });
+        lista.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String selected = lista.getSelectedValue().toString();
+                System.out.println(selected);
+                new SelectedOglas(selected);
+
+            }
+        });
     }
+
 }

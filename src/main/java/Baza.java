@@ -757,6 +757,50 @@ public class Baza {
         }
         return id_skup;
     }
+    public static ArrayList<String> IzpisOglasov()
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT id, ime FROM oglasi;";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(2);
+                m += " ";
+                m += rez.getInt(1);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
+    public static String opisSkupine(String imee)
+    {
+        String skupine = "";
+        String comm = "SELECT opis FROM oglasi WHERE ime = '"+ imee +"';";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                skupine = rez.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return skupine;
+    }
 
 
 }
