@@ -49,14 +49,12 @@ public class HomePage{
         frame.setVisible(true);
         ustvariSkupinoButton.setVisible(false);
         narediOglasButton.setVisible(false);
-        //pridruziSkupiniButton.setVisible(false);
+        pridruziSkupiniButton.setVisible(false);
         setActionListeners();
         int in=Baza.IDmuzikantanull(idu);
         if(in>0){
             ustvariSkupinoButton.setVisible(true);
-
-
-
+            pridruziSkupiniButton.setVisible(true);
         }
         else{
             int id=Baza.IDmuzikantanulladmin(idu);
@@ -94,13 +92,13 @@ public class HomePage{
         lista.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("1");
+
                 super.mouseClicked(e);
-                System.out.println("2");
+
                 String selected = lista.getSelectedValue().toString();
-                System.out.println("3");
+
                 System.out.println(selected);
-                System.out.println("4");
+
                 new SelectedOglas(selected);
 
             }

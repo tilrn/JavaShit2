@@ -897,6 +897,26 @@ public class Baza {
             System.out.println("Selectskupine() napaka " + e);
         }
         return skupine;
+    }public static int IDmuzikantanullskupine(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT id FROM muzikanti WHERE id = '"+ idu +"'AND skupina_id IS not null ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
     }
 
 
