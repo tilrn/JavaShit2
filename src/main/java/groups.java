@@ -37,6 +37,7 @@ public class groups {
     private JPanel content;
     private JLabel naslov;
     private JLabel opis;
+    private JLabel adsa;
 
 
     public groups()

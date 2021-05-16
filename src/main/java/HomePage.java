@@ -30,10 +30,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class HomePage{
-    private JButton createGroupButton;
+    private JButton narediOglasButton;
     private JList list1;
     private JPanel HomePage;
-
+    private JButton pridruziSkupiniButton;
+    private JButton ustvariSkupinoButton;
 
 
     public HomePage()
@@ -45,8 +46,14 @@ public class HomePage{
         frame.setSize(800, 750);
         frame.setVisible(true);
 
-        //setActionListeners();
+        setActionListeners();
 
 
+    }
+    private void setActionListeners()
+    {
+        ustvariSkupinoButton.addActionListener(e -> {
+            new UstvariSkupino();
+        });
     }
 }
