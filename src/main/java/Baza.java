@@ -723,4 +723,18 @@ public class Baza {
         }
 
     }
+    public static void InsertUporabnikSkupina(String ime, String opis)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("INSERT INTO znamke(ime_z, opis_z) VALUES('" + ime + "','" +  opis + "');");
+        }
+        catch (SQLException e) {
+
+            System.out.println("InsertZnamka napaka " + e );
+        }
+    }
+
+
 }
