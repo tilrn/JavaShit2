@@ -46,8 +46,14 @@ public class HomePage{
         frame.setSize(800, 750);
         frame.setVisible(true);
 
-        //setActionListeners();
+        setActionListeners();
 
 
+    }
+    private void setActionListeners()
+    {
+        ustvariSkupinoButton.addActionListener(e -> {
+            new UstvariSkupino();
+        });
     }
 }

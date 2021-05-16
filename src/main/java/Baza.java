@@ -1,179 +1,726 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-
 
 public class Baza {
-
+    public Baza() {
+    }
 
     public static Connection connect() {
         Connection con = null;
-        try
-        {
+
+        try {
             con = DriverManager.getConnection("jdbc:postgresql://ec2-176-34-222-188.eu-west-1.compute.amazonaws.com:5432/d6mgn1man4juqu", "epebibyjgvxunf", "93ec9324d483d5ed6ade4fee633490dd665c1d710943c76dbd59a7ece3df6432");
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException var2) {
             System.out.println("povezava z bazo ni uspela");
         }
+
         return con;
     }
-    public static ArrayList<String> SelectKraji()
-    {
+
+    public static ArrayList<String> SelectKraji() {
         String com = "SELECT ime FROM kraji";
-        ArrayList<String> locations = new ArrayList<String>();
+        ArrayList locations = new ArrayList();
 
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(com))
-        {
+        try {
+            Connection con = connect();
 
-            while (rez.next()) {
-                String k = rez.getString(1);
-                locations.add(k);
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(com);
+
+                    try {
+                        while(rez.next()) {
+                            String k = rez.getString(1);
+                            locations.add(k);
+                        }
+                    } catch (Throwable var10) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var9) {
+                                var10.addSuppressed(var9);
+                            }
+                        }
+
+                        throw var10;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var11) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var8) {
+                            var11.addSuppressed(var8);
+                        }
+                    }
+
+                    throw var11;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var12) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var7) {
+                        var12.addSuppressed(var7);
+                    }
+                }
+
+                throw var12;
             }
 
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var13) {
+            System.out.println("SelectKraji() napaka " + var13);
         }
-        catch (SQLException e) {
 
-            System.out.println("SelectKraji() napaka " + e );
-        }
         return locations;
-
     }
-    public static boolean SelectLogin(String email_, String pass_)
-    {
+
+    public static boolean SelectLogin(String email_, String pass_) {
         String com = "SELECT mail, geslo FROM muzikanti WHERE (mail='" + email_ + "') AND (geslo='" + pass_ + "');";
         boolean potrditev = false;
 
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(com))
-        {
+        try {
+            Connection con = connect();
 
-            while (rez.next()) {
-                String l = rez.getString(1);
-                if(l != null)
-                {
-                    potrditev = true;
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(com);
+
+                    try {
+                        while(rez.next()) {
+                            String l = rez.getString(1);
+                            if (l != null) {
+                                potrditev = true;
+                            }
+                        }
+                    } catch (Throwable var12) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var11) {
+                                var12.addSuppressed(var11);
+                            }
+                        }
+
+                        throw var12;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var13) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var10) {
+                            var13.addSuppressed(var10);
+                        }
+                    }
+
+                    throw var13;
                 }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var14) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var9) {
+                        var14.addSuppressed(var9);
+                    }
+                }
+
+                throw var14;
             }
 
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var15) {
+            System.out.println("Login napaka " + var15);
         }
-        catch (SQLException e) {
 
-            System.out.println("Login napaka " + e );
-        }
         return potrditev;
     }
-    public static boolean registracija(String ime,String priimek, String email, String pass) {
+
+    public static boolean registracija(String ime, String priimek, String email, String pass) {
         String com = "SELECT ('" + ime + "','" + email + "','" + pass + "','" + priimek + "')";
         boolean ok = true;
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(com)){
 
-            while (rez.next()) {
-                ok = rez.getBoolean(1);
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(com);
+
+                    try {
+                        while(rez.next()) {
+                            ok = rez.getBoolean(1);
+                        }
+                    } catch (Throwable var14) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var13) {
+                                var14.addSuppressed(var13);
+                            }
+                        }
+
+                        throw var14;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var15) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var12) {
+                            var15.addSuppressed(var12);
+                        }
+                    }
+
+                    throw var15;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var16) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var11) {
+                        var16.addSuppressed(var11);
+                    }
+                }
+
+                throw var16;
             }
 
-        } catch (SQLException e) {
-
-            System.out.println("registracija() napaka " + e);
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var17) {
+            System.out.println("registracija() napaka " + var17);
         }
+
         return ok;
+    }
+
+    public static void InsertOglas(String imee, String opiss) {
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    stat.executeUpdate("INSERT INTO oglasi(ime, opis) VALUES('" + imee + "','" + opiss + "');");
+                } catch (Throwable var8) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var7) {
+                            var8.addSuppressed(var7);
+                        }
+                    }
+
+                    throw var8;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var9) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var6) {
+                        var9.addSuppressed(var6);
+                    }
+                }
+
+                throw var9;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var10) {
+            System.out.println("InsertOglas " + var10);
+        }
 
     }
-    public static void InsertOglas(String imee, String opiss)
-    {
-        try (Connection con = connect();
-             Statement stat = con.createStatement())
-        {
-            stat.executeUpdate("INSERT INTO oglasi(ime, opis) VALUES('" + imee + "','" +  opiss + "');");
-        }
-        catch (SQLException e) {
 
-            System.out.println("InsertOglas " + e );
-        }
-    }
-    public static ArrayList<String> SkupineIzpis()
-    {
-        ArrayList<String> casi = new ArrayList<>();
+    public static ArrayList<String> SkupineIzpis() {
+        ArrayList<String> casi = new ArrayList();
         String comm = "SELECT id, ime FROM skupine;";
-        String cas;
 
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(comm)) {
+        try {
+            Connection con = connect();
 
-            while (rez.next()) {
-                String m = rez.getString(2);
-                casi.add(m);
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(comm);
+
+                    try {
+                        while(rez.next()) {
+                            String m = rez.getString(2);
+                            casi.add(m);
+                        }
+                    } catch (Throwable var11) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var10) {
+                                var11.addSuppressed(var10);
+                            }
+                        }
+
+                        throw var11;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var12) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var12.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var12;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var13) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var13.addSuppressed(var8);
+                    }
+                }
+
+                throw var13;
             }
 
-        } catch (SQLException e) {
-
-            System.out.println("Selectskupine() napaka " + e);
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var14) {
+            System.out.println("Selectskupine() napaka " + var14);
         }
+
         return casi;
     }
-    public static ArrayList<String> ZvrstiIzpis()
-    {
-        ArrayList<String> casi = new ArrayList<>();
+
+    public static ArrayList<String> ZvrstiIzpis() {
+        ArrayList<String> zvrsti = new ArrayList();
         String comm = "SELECT id, ime FROM zvrsti;";
-        String cas;
 
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(comm)) {
+        try {
+            Connection con = connect();
 
-            while (rez.next()) {
-                String m = rez.getString(2);
-                casi.add(m);
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(comm);
+
+                    try {
+                        while(rez.next()) {
+                            String zvr = rez.getString(2);
+                            zvrsti.add(zvr);
+                        }
+                    } catch (Throwable var11) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var10) {
+                                var11.addSuppressed(var10);
+                            }
+                        }
+
+                        throw var11;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var12) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var12.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var12;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var13) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var13.addSuppressed(var8);
+                    }
+                }
+
+                throw var13;
             }
 
-        } catch (SQLException e) {
-
-            System.out.println("SelectZvrsti() napaka " + e);
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var14) {
+            System.out.println("SelectZvrsti() napaka " + var14);
         }
-        return casi;
+
+        return zvrsti;
     }
-    public static ArrayList<String> ClaniIzpis()
-    {
-        ArrayList<String> casi = new ArrayList<>();
-        String comm = "SELECT id, ime FROM muzikanti;";
-        String cas;
 
-        try (Connection con = connect();
-             Statement stat = con.createStatement();
-             ResultSet rez = stat.executeQuery(comm)) {
+    public static ArrayList<String> ClaniIzpis() {
+        ArrayList<String> casi = new ArrayList();
+        String comm = "SELECT id, ime, priimek FROM muzikanti;";
 
-            while (rez.next()) {
-                String m = rez.getString(2);
-                casi.add(m);
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(comm);
+
+                    try {
+                        while(rez.next()) {
+                            String m = rez.getString(2);
+                            m = m + " ";
+                            m = m + rez.getString(3);
+                            casi.add(m);
+                        }
+                    } catch (Throwable var11) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var10) {
+                                var11.addSuppressed(var10);
+                            }
+                        }
+
+                        throw var11;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var12) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var12.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var12;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var13) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var13.addSuppressed(var8);
+                    }
+                }
+
+                throw var13;
             }
 
-        } catch (SQLException e) {
-
-            System.out.println("SelectZvrsti() napaka " + e);
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var14) {
+            System.out.println("SelectZvrsti() napaka " + var14);
         }
+
         return casi;
     }
-    public static void insertMuzikant(String imee, String priimek, String maill, String gesloo,String krajj)
-    {
-        System.out.println("SelectKraji() napaka "+krajj);
-        try (Connection con = connect();
-             Statement stat = con.createStatement())
-        {
-            stat.executeUpdate("INSERT INTO muzikanti(ime, priimek,mail,geslo,kraj_id) VALUES('" + imee + "','" +  priimek + "','"+maill+"','"+gesloo+"',(SELECT id FROM kraji WHERE LOWER(ime) = LOWER('"+krajj+"')))");
-        }
-        catch (SQLException e) {
 
-            System.out.println("InsertOglas " + e );
+    public static void InsertSkupina(String imee, String opiss, int krajj_id, int zvrstt_id) {
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    stat.executeUpdate("INSERT INTO skupine(ime, opis,kraj_id,zvrst_id) VALUES('" + imee + "','" + opiss + "'," + krajj_id + ", " + zvrstt_id + ");");
+                } catch (Throwable var10) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var10.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var10;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var11) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var11.addSuppressed(var8);
+                    }
+                }
+
+                throw var11;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var12) {
+            System.out.println("InsertOglas " + var12);
         }
+
     }
 
+    public static int IDkraja(String imee) {
+        String comm = "SELECT id FROM kraji WHERE ime = '" + imee + "';";
+        int idd = 0;
+
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(comm);
+
+                    try {
+                        while(rez.next()) {
+                            idd = rez.getInt(1);
+                        }
+                    } catch (Throwable var11) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var10) {
+                                var11.addSuppressed(var10);
+                            }
+                        }
+
+                        throw var11;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var12) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var12.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var12;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var13) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var13.addSuppressed(var8);
+                    }
+                }
+
+                throw var13;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var14) {
+            System.out.println("selectIDkraja() napaka " + var14);
+        }
+
+        return idd;
+    }
+
+    public static int IDzvrsti(String imee) {
+        String comm = "SELECT id FROM zvrsti WHERE ime = '" + imee + "';";
+        int idd = 0;
+
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    ResultSet rez = stat.executeQuery(comm);
+
+                    try {
+                        while(rez.next()) {
+                            idd = rez.getInt(1);
+                        }
+                    } catch (Throwable var11) {
+                        if (rez != null) {
+                            try {
+                                rez.close();
+                            } catch (Throwable var10) {
+                                var11.addSuppressed(var10);
+                            }
+                        }
+
+                        throw var11;
+                    }
+
+                    if (rez != null) {
+                        rez.close();
+                    }
+                } catch (Throwable var12) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var9) {
+                            var12.addSuppressed(var9);
+                        }
+                    }
+
+                    throw var12;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var13) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var8) {
+                        var13.addSuppressed(var8);
+                    }
+                }
+
+                throw var13;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var14) {
+            System.out.println("selectIDzvrsti() napaka " + var14);
+        }
+
+        return idd;
+    }
+
+    public static void insertMuzikant(String imee, String priimek, String maill, String gesloo, String krajj) {
+        System.out.println("SelectKraji() napaka " + krajj);
+
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    stat.executeUpdate("INSERT INTO muzikanti(ime, priimek,mail,geslo,kraj_id) VALUES('" + imee + "','" + priimek + "','" + maill + "','" + gesloo + "',(SELECT id FROM kraji WHERE LOWER(ime) = LOWER('" + krajj + "')))");
+                } catch (Throwable var11) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var10) {
+                            var11.addSuppressed(var10);
+                        }
+                    }
+
+                    throw var11;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var12) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var9) {
+                        var12.addSuppressed(var9);
+                    }
+                }
+
+                throw var12;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var13) {
+            System.out.println("InsertOglas " + var13);
+        }
+
+    }
 }
