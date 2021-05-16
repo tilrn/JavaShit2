@@ -164,5 +164,59 @@ public class Baza {
         }
         return casi;
     }
+    public static void InsertSkupina(String imee, String opiss,int krajj_id,int zvrstt_id)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("INSERT INTO skupine(ime, opis,kraj_id,zvrst_id) VALUES('" + imee + "','" +  opiss + "',"+krajj_id+", "+zvrstt_id+");");
+        }
+        catch (SQLException e) {
+
+            System.out.println("InsertOglas " + e );
+        }
+    }
+    public static int IDkraja(String imee)
+    {
+
+        String comm = "SELECT id FROM kraji WHERE ime = '"+imee+"';";
+        int idd = 0;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                 idd = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("selectIDkraja() napaka " + e);
+        }
+        return idd;
+    }
+    public static int IDzvrsti(String imee)
+    {
+
+        String comm = "SELECT id FROM zvrsti WHERE ime = '"+imee+"';";
+        int idd = 0;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                idd = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("selectIDzvrsti() napaka " + e);
+        }
+        return idd;
+    }
 
 }
