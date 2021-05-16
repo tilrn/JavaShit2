@@ -14,7 +14,7 @@ public class SelectedOglas {
         frame.setContentPane(selectoglas);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setSize(800, 750);
+        frame.setSize(400, 500);
         frame.setVisible(true);
 
         setActionListeners();
