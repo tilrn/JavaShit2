@@ -1104,6 +1104,53 @@ public class Baza {
         }
         return id_skupine;
     }
+    public static String opisoglasa(int id)
+    {
+        String id_skupine="";
+        String comm = "SELECT opis FROM oglasi WHERE id="+id+" ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
+    }
+    public static void updateoglasi( int id,String ime,String opis)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("UPDATE oglasi SET ime='"+ime+"',opis='"+opis+"' WHERE id="+id+"");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
+    public static void deleteoglas( int id)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("DELET FROM oglasi WHERE id="+id+"");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
 
 
 
