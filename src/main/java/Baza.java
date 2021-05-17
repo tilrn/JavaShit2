@@ -1352,6 +1352,28 @@ public class Baza {
             System.out.println("updatestclanovnapaka napaka " + e );
         }
     }
+    public static String opisclana(String ime)
+    {
+        String id_skupine="";
+        String comm = "SELECT opis FROM potrjen WHERE muzikant_id=(SELECT id FROM muzikanti WHERE ime ='"+ ime+"' ) ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
+    }
+
 
 
 

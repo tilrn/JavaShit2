@@ -5,16 +5,21 @@ public class Odzivi {
     private JButton Potrdi;
     private JButton Zavrni;
     private JComboBox comboBox1;
+    private JTextArea textArea1;
+    private JButton selectbutton;
     int MuzikantID = 0;
 
     public Odzivi(int muzikantID) {
         MuzikantID = muzikantID;
         JFrame frame = new JFrame("Odzivi");
         frame.setContentPane(odzivi);
+        Potrdi.setVisible(false);
+        Zavrni.setVisible(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setSize(600, 400);
         frame.setVisible(true);
+
 
         setActionListeners();
         int id_skupine = Baza.IDskupineZIdMuzikant(MuzikantID);
@@ -45,6 +50,14 @@ public class Odzivi {
             Baza.Zavrni(ime);
             nigger();
         });
+        selectbutton.addActionListener(e -> {
+            String ime=comboBox1.getSelectedItem().toString();
+
+            textArea1.setText(Baza.opisclana(ime));
+            Potrdi.setVisible(true);
+            Zavrni.setVisible(true);
+        }
+    );
 
 
 
