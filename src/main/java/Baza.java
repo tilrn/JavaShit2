@@ -1053,6 +1053,29 @@ public class Baza {
         }
         return id_muzikanta;
     }
+    public static ArrayList<String> IzpisOdzivov(int id_potrjen)
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT opis,muzikant_id FROM potrjen;";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(2);
+                m += "Ω";
+                m += rez.getInt(1);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
 
 
 
