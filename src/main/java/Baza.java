@@ -918,6 +918,19 @@ public class Baza {
         }
         return id_muzikanta;
     }
+    public static void stclanov( int stclanov,int ids)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("UPDATE skupine SET st_clanov = "+stclanov+" WHERE id="+ids+"");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
 
 
 }

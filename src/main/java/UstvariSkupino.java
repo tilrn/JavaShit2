@@ -23,6 +23,7 @@ public class UstvariSkupino {
     private JButton Delete6;
     private JButton koncaj;
     private JButton DeleteClani;
+    private JLabel adminlabel;
 
     public int idu;
 
@@ -49,7 +50,7 @@ public class UstvariSkupino {
         clan5.setVisible(false);
         DeleteClani.setVisible(false);
         koncaj.setVisible(false);
-
+        adminlabel.setVisible(false);
 
         
 
@@ -97,7 +98,7 @@ public class UstvariSkupino {
             clan5.setVisible(true);
             DeleteClani.setVisible(true);
             koncaj.setVisible(true);
-
+            adminlabel.setVisible(true);
 
             textField1.disable();
             textField2.disable();
@@ -107,6 +108,7 @@ public class UstvariSkupino {
 
         });
         koncaj.addActionListener(e -> {
+            int st_clanov=0;
             int ID_skupine = Baza.IDskupine(ime);
             System.out.println(ID_skupine);
             if(clan1.getText() != "-----"){
@@ -118,6 +120,7 @@ public class UstvariSkupino {
                 System.out.println(ime);
                 System.out.println(priimek);
                 Baza.InsertUporabnikSkupinaadmin(ime,priimek,ID_skupine,idu);
+                st_clanov ++;
             }
             if(clan2.getText() != "-----"){
                 String str = clan2.getText();
@@ -125,6 +128,7 @@ public class UstvariSkupino {
                 String ime = random[0];
                 String priimek = random[1];
                 Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+                st_clanov ++;
 
             }
             if(clan3.getText() != "-----"){
@@ -133,6 +137,7 @@ public class UstvariSkupino {
                 String ime = random[0];
                 String priimek = random[1];
                 Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+                st_clanov ++;
 
             }
             if(clan4.getText() != "-----"){
@@ -141,6 +146,7 @@ public class UstvariSkupino {
                 String ime = random[0];
                 String priimek = random[1];
                 Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
+                st_clanov ++;
 
             }
             if(clan5.getText() != "-----"){
@@ -149,8 +155,11 @@ public class UstvariSkupino {
                 String ime = random[0];
                 String priimek = random[1];
                 Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
-
+                st_clanov ++;
             }
+            //System.out.println(st_clanov);
+            int lol=Baza.IDskupine(ime);
+            Baza.stclanov(st_clanov,lol);
             zakluci();
 
         });
