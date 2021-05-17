@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class registration {
 
@@ -32,6 +34,28 @@ public class registration {
 
 
     }
+    public static String doHashing (String password) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+            messageDigest.update(password.getBytes());
+
+            byte[] resultByteArray = messageDigest.digest();
+
+            StringBuilder sb = new StringBuilder();
+
+            for (byte b : resultByteArray) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return "";
+    }
     private void Fill_krajcombo()
     {
         DefaultComboBoxModel mod = new DefaultComboBoxModel();
@@ -49,7 +73,7 @@ public class registration {
 
             String kraj= krajbox.getSelectedItem().toString();
             //System.out.println("SelectKraji() napaka "+kraj);
-            Baza.insertMuzikant(name, surname,email,password,kraj);
+            Baza.insertMuzikant(name, surname,email,doHashing(password),kraj);
             new login();
 
         });

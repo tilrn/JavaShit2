@@ -56,6 +56,7 @@ public class HomePage{
         uredioglas.setVisible(false);
         setActionListeners();
         int in=Baza.IDmuzikantanull(idu);
+        System.out.println(in);
         if(in>0){
             ustvariSkupinoButton.setVisible(true);
             pridruziSkupiniButton.setVisible(false);

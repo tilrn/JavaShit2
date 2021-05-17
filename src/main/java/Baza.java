@@ -815,7 +815,7 @@ public class Baza {
     public static int IDmuzikantanull(int idu)
     {
         int id_muzikanta = 0;
-        String comm = "SELECT id FROM muzikanti WHERE id = '"+ idu +"'AND skupina_id IS null ;";
+        String comm = "SELECT id FROM muzikanti WHERE id = "+ idu +"AND skupina_id IS null ;";
 
 
         try (Connection con = connect();
