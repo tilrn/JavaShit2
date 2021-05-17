@@ -68,16 +68,6 @@
           <text value="Uredi"/>
         </properties>
       </component>
-      <vspacer id="b7a06">
-        <constraints>
-          <grid row="1" column="0" row-span="8" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <vspacer id="f1cd6">
-        <constraints>
-          <grid row="1" column="4" row-span="8" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <component id="c95f0" class="javax.swing.JButton" binding="deleteButton" default-binding="true">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -94,6 +84,16 @@
           <text value="Update"/>
         </properties>
       </component>
+      <hspacer id="8e69e">
+        <constraints>
+          <grid row="1" column="4" row-span="8" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="18300">
+        <constraints>
+          <grid row="1" column="0" row-span="8" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>

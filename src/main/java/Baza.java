@@ -1143,7 +1143,7 @@ public class Baza {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("DELET FROM oglasi WHERE id="+id+"");
+            stat.executeUpdate("DELETE FROM oglasi WHERE id="+id+"");
             System.out.println();
         }
         catch (SQLException e) {

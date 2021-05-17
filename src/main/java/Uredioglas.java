@@ -22,7 +22,7 @@ public class Uredioglas {
         comboBox1.setModel(mod);
         JFrame frame = new JFrame("Oglas :");
         frame.setContentPane(uredioglas);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setSize(400, 400);
         frame.setVisible(true);
@@ -53,6 +53,7 @@ public class Uredioglas {
             textField1.setText(ime);
             String opis = Baza.opisoglasa(ido);
             textArea1.setText(opis);
+            uredibutton.setVisible(false);
         });
         updateButton.addActionListener(e -> {
             String ime=textField1.getText();
@@ -68,10 +69,23 @@ public class Uredioglas {
             comboBox1.enable();
             uredibutton.enable();
             comboBox1.setSelectedIndex(-1);
+            uredibutton.setVisible(true);
         });
         deleteButton.addActionListener(e -> {
+            String zdle=comboBox1.getSelectedItem().toString();
             int ido=Baza.idoglasa(comboBox1.getSelectedItem().toString());
-
+            comboBox1.removeItem(zdle);
+            Baza.deleteoglas(ido);
+            textField1.setVisible(false);
+            textArea1.setVisible(false);
+            imelabel.setVisible(false);
+            opislabel.setVisible(false);
+            updateButton.setVisible(false);
+            deleteButton.setVisible(false);
+            comboBox1.enable();
+            uredibutton.enable();
+            comboBox1.setSelectedIndex(-1);
+            uredibutton.setVisible(true);
         });
     };
 }
