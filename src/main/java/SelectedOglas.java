@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class SelectedOglas {
     private JButton SendInvite;
@@ -14,7 +13,7 @@ public class SelectedOglas {
         frame.setContentPane(selectoglas);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setSize(400, 500);
+        frame.setSize(400, 400);
         frame.setVisible(true);
 
         setActionListeners();

@@ -6,7 +6,9 @@ public class login {
     private JFormattedTextField emailField;
     private JPasswordField passwordField;
     private JButton prijavaButton;
-
+    public String mail;
+    public String geslo;
+    public int ID_muzikanta;
     public static int id_;
     private JTextField textField1;
     private JTextField textField2;
@@ -18,7 +20,7 @@ public class login {
         frame.setContentPane(login);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(300, 150);
+        frame.setSize(400, 300);
         frame.setVisible(true);
 
         setActionListeners();
@@ -26,14 +28,26 @@ public class login {
 
     }
     public void zakluci(){
-        new HomePage();
+        new HomePage(ID_muzikanta);
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(login);
         frame.dispose();
     }
 
     private void setActionListeners()
     {
-        button1.addActionListener(e -> { if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false){textField1.setText("ni pravilno geslo"); }else {zakluci();};   });
+        button1.addActionListener(e -> {
+            if(Baza.SelectLogin(textField1.getText(),textField2.getText()) == false)
+            {
+                textField1.setText("ni pravilno geslo");
+            }
+            else {
+                mail =textField1.getText() ;
+                geslo= textField2.getText();
+                ID_muzikanta = Baza.IDmuzikanta(mail,geslo);
+                System.out.println(ID_muzikanta);
+                zakluci();
+            };
+        });
     }
 
 
