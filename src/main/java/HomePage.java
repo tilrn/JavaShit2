@@ -36,10 +36,12 @@ public class HomePage{
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
     private JLabel oglaslabel;
+    private JButton odziviButton;
     public int idu=0;
-
+    int Idmuzikanta = 0;
     public HomePage(int idmuzikanta)
     {
+        Idmuzikanta = idmuzikanta;
         idu=idmuzikanta;
         System.out.println(idu);
         oglaslabel.setSize(500, 400);
@@ -101,11 +103,21 @@ public class HomePage{
 
                 System.out.println(selected);
 
-                new SelectedOglas(selected);
+                new SelectedOglas(Idmuzikanta,selected);
 
             }
         });
+        odziviButton.addActionListener(e -> {
 
 
+
+        });
+
+
+    }
+    public void zakluciOdzivi(){
+        new Odzivi(Idmuzikanta);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HomePage);
+        frame.dispose();
     }
 }

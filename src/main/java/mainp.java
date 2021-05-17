@@ -18,12 +18,22 @@ public class mainp {
 
 
     }
+    public void zakluciLog(){
+        new login();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(mainp);
+        frame.dispose();
+    }
+    public void zakluciReg(){
+        new registration();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(mainp);
+        frame.dispose();
+    }
 
     private void setActionListeners()
     {
 
-        button1.addActionListener(e -> { new registration();});
+        button1.addActionListener(e -> { zakluciReg();});
 
-        button2.addActionListener(e -> { new login();});
+        button2.addActionListener(e -> { zakluciLog();});
     }
 }

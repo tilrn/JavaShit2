@@ -931,6 +931,65 @@ public class Baza {
             System.out.println("updatestclanovnapaka napaka " + e );
         }
     }
+    public static void InsertRequest(int id_muzikanta,int id_oglasa, String opis)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("INSERT INTO potrjen(potrjen,opis,oglas_id,muzikant_id) VALUES(0,'"+opis+"',"+id_oglasa+","+id_muzikanta+");");
+        }
+        catch (SQLException e) {
+
+            System.out.println("InsertZnamka napaka " + e );
+        }
+    }
+    public static int IDOglasa(String imee)
+    {
+        int id_skup = 0;
+        String comm = "SELECT id FROM oglasi WHERE ime = '"+ imee +"';";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skup = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skup;
+    }
+    public static void Zavrni( int stclanov,int ids)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("UPDATE skupine SET st_clanov = "+stclanov+" WHERE id="+ids+"");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
+    public static void Potrdi( int stclanov,int ids)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("UPDATE skupine SET st_clanov = "+stclanov+" WHERE id="+ids+"");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
 
 
 

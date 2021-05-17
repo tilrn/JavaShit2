@@ -22,7 +22,7 @@ public class registration {
     {
         JFrame frame = new JFrame("Reg");
         frame.setContentPane(registration);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setSize(550, 400);
         frame.setVisible(true);
@@ -31,6 +31,11 @@ public class registration {
         Fill_krajcombo();
 
 
+    }
+    public void zakluci(){
+        new login();
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(registration);
+        frame.dispose();
     }
     private void Fill_krajcombo()
     {
@@ -50,7 +55,7 @@ public class registration {
             String kraj= krajbox.getSelectedItem().toString();
             //System.out.println("SelectKraji() napaka "+kraj);
             Baza.insertMuzikant(name, surname,email,password,kraj);
-            new login();
+            zakluci();
 
         });
 
