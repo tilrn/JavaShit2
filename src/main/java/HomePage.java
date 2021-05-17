@@ -35,13 +35,14 @@ public class HomePage{
     private JPanel HomePage;
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
-    private JLabel muzikantlabel;
+    private JLabel oglaslabel;
     public int idu=0;
 
     public HomePage(int idmuzikanta)
     {
         idu=idmuzikanta;
         System.out.println(idu);
+        oglaslabel.setSize(500, 400);
         JFrame frame = new JFrame("Login");
         frame.setContentPane(HomePage);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,7 +56,7 @@ public class HomePage{
         int in=Baza.IDmuzikantanull(idu);
         if(in>0){
             ustvariSkupinoButton.setVisible(true);
-            pridruziSkupiniButton.setVisible(true);
+            pridruziSkupiniButton.setVisible(false);
         }
         else{
             int id=Baza.IDmuzikantanulladmin(idu);
@@ -104,6 +105,7 @@ public class HomePage{
 
             }
         });
+
 
     }
 }

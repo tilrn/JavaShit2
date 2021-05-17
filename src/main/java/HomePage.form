@@ -28,6 +28,7 @@
           </grid>
         </constraints>
         <properties>
+          <font size="22"/>
           <model/>
         </properties>
       </component>
@@ -47,12 +48,13 @@
           <text value="Ustvari skupino"/>
         </properties>
       </component>
-      <component id="197bf" class="javax.swing.JLabel" binding="muzikantlabel">
+      <component id="737f" class="javax.swing.JLabel" binding="oglaslabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Label"/>
+          <font size="18"/>
+          <text value="Oglasi: "/>
         </properties>
       </component>
     </children>

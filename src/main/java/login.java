@@ -20,7 +20,7 @@ public class login {
         frame.setContentPane(login);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(300, 150);
+        frame.setSize(400, 300);
         frame.setVisible(true);
 
         setActionListeners();
