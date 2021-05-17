@@ -2,13 +2,16 @@ import javax.swing.*;
 
 public class PridruziSkupini {
     private JComboBox comboBox1;
-    private JButton button1;
+    private JButton pridruzi_se;
     private JPanel pridruzi;
     private JTextPane textPane1;
 
-
-    public PridruziSkupini()
+    int Oglas_id = 0;
+    int MuzikantID = 0;
+    public PridruziSkupini(int muzikantID,int oglas_id)
     {
+        MuzikantID = muzikantID;
+        Oglas_id = oglas_id;
         JFrame frame = new JFrame("Login");
         frame.setContentPane(pridruzi);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -23,20 +26,22 @@ public class PridruziSkupini {
     }
 
 
-    private void setActionListeners()
-    {
+    private void setActionListeners() {
 
-            button1.addActionListener(e -> {
-            String ime = comboBox1.getSelectedItem().toString();
+        pridruzi_se.addActionListener(e -> {
 
-
-
-
-
+            String opis = textPane1.getText();
+            Baza.InsertRequest(MuzikantID, Oglas_id, opis);
+            zakluci();
         });
+
+
     }
-
-
+    public void zakluci(){
+        new HomePage(MuzikantID);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(pridruzi);
+        frame.dispose();
+    }
 
 
 }

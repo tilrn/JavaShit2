@@ -37,6 +37,7 @@ public class HomePage{
     private JButton ustvariSkupinoButton;
     private JLabel oglaslabel;
     private JButton uredioglas;
+    private JButton odziviButton;
     public int idu=0;
 
     public HomePage(int idmuzikanta)
@@ -105,7 +106,7 @@ public class HomePage{
                 int idso=Baza.idskupineoglasa(selected);
                 System.out.println(selected);
 
-                new SelectedOglas(selected,idso);
+                new SelectedOglas(idu,selected,idso);
 
             }
         });
@@ -122,7 +123,15 @@ public class HomePage{
             int ids=Baza.idskupine(idu);
             new Uredioglas(ids);
         });
+        odziviButton.addActionListener(e -> {
+            zakluciOdzivi();
+        });
 
 
+    }
+    public void zakluciOdzivi(){
+        new Odzivi(idu);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HomePage);
+        frame.dispose();
     }
 }

@@ -7,10 +7,13 @@ public class SelectedOglas {
     private JLabel opis_oglasa;
     private JLabel skupinaime;
     public int Idso=0;
-
-    public SelectedOglas(String ime,int idso)
+    public int Idu=0;
+    String imee  = "";
+    public SelectedOglas(int idu,String ime,int idso)
     {
+        Idu=idu;
         Idso=idso;
+        imee=ime;
         System.out.println(Idso);
         JFrame frame = new JFrame("Oglas : "+ime+"");
         frame.setContentPane(selectoglas);
@@ -30,17 +33,23 @@ public class SelectedOglas {
 
 
 
-
+    int id_oglasa = 0;
     private void setActionListeners(){
 
 
+        id_oglasa = Baza.IDOglasa(imee);
         SendInvite.addActionListener(e -> {
-        new PridruziSkupini();
 
+            zakluci();
         });
 
 
     };
+    public void zakluci(){
+        new PridruziSkupini(Idu,id_oglasa);
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(selectoglas);
+        frame.dispose();
+    }
 
 
 
