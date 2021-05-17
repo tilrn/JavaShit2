@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class SelectedOglas {
     private JButton SendInvite;
-    private JPanel selectoglas1;
+    private JPanel selectoglas;
     private JLabel ime_oglasa;
     private JLabel opis_oglasa;
 
@@ -10,10 +10,10 @@ public class SelectedOglas {
     public SelectedOglas(String ime)
     {
         JFrame frame = new JFrame("Oglas : "+ime+"");
-        frame.setContentPane(selectoglas1);
+        frame.setContentPane(selectoglas);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setSize(800, 750);
+        frame.setSize(400, 500);
         frame.setVisible(true);
 
         setActionListeners();
@@ -31,11 +31,12 @@ public class SelectedOglas {
 
 
         SendInvite.addActionListener(e -> {
+        new PridruziSkupini();
 
         });
 
 
-    }
+    };
 
 
 

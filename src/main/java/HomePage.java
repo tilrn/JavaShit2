@@ -35,6 +35,7 @@ public class HomePage{
     private JPanel HomePage;
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
+    private JLabel muzikantlabel;
     public int idu=0;
 
     public HomePage(int idmuzikanta)

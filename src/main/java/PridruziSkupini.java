@@ -4,6 +4,7 @@ public class PridruziSkupini {
     private JComboBox comboBox1;
     private JButton button1;
     private JPanel pridruzi;
+    private JTextPane textPane1;
 
 
     public PridruziSkupini()
@@ -17,12 +18,7 @@ public class PridruziSkupini {
 
         setActionListeners();
 
-       //ArrayList<String> lol = new ArrayList<String>();
-        DefaultComboBoxModel mod = new DefaultComboBoxModel();
-        //lol = Baza.SkupineIzpis();
-       // lol.forEach((s) -> comboBox1.addItem(s));
-        mod.addAll(Baza.SkupineIzpis());
-        comboBox1.setModel(mod);
+
 
     }
 
