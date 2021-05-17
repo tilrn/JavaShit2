@@ -866,7 +866,7 @@ public class Baza {
 
             while (rez.next()) {
                 String m = rez.getString(2);
-                m += " ";
+                m += "/";
                 m += rez.getInt(1);
                 casi.add(m);
             }
@@ -930,6 +930,179 @@ public class Baza {
 
             System.out.println("updatestclanovnapaka napaka " + e );
         }
+    }
+    public static void insertoglasi(String imee, String opis,int ids) {
+
+
+        try {
+            Connection con = connect();
+
+            try {
+                Statement stat = con.createStatement();
+
+                try {
+                    stat.executeUpdate("INSERT INTO oglasi(ime,opis,skupina_id) VALUES('" + imee + "','" + opis + "'," + ids + ") ");
+                } catch (Throwable var11) {
+                    if (stat != null) {
+                        try {
+                            stat.close();
+                        } catch (Throwable var10) {
+                            var11.addSuppressed(var10);
+                        }
+                    }
+
+                    throw var11;
+                }
+
+                if (stat != null) {
+                    stat.close();
+                }
+            } catch (Throwable var12) {
+                if (con != null) {
+                    try {
+                        con.close();
+                    } catch (Throwable var9) {
+                        var12.addSuppressed(var9);
+                    }
+                }
+
+                throw var12;
+            }
+
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException var13) {
+            System.out.println("InsertOglas " + var13);
+        }
+
+    }
+    public static int idskupine(int idu)
+    {
+        int id_skupine = 0;
+        String comm = "SELECT s.id FROM muzikanti m INNER JOIN skupine s ON s.id=m.skupina_id WHERE(m.id="+idu+") ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
+    }
+    public static int idskupineoglasa(String idu)
+    {
+        int id_skupine = 0;
+        String comm = "SELECT id FROM oglasi WHERE ime='"+idu+"' ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
+    }
+    public static String imeskupine(int id)
+    {
+        String ime ="";
+        String comm = "SELECT ime FROM skupine WHERE id="+id+" ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                ime = rez.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return ime;
+    }
+    public static ArrayList<String> IzpisOglasovskupine(int ids)
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT ime FROM oglasi WHERE skupina_id="+ids+";";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(1);
+
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
+    public static int idoglasa(String ime)
+    {
+        int id_skupine = 0;
+        String comm = "SELECT id FROM oglasi WHERE ime='"+ime+"' ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
+    }
+    public static String imeoglasa(int id)
+    {
+        String id_skupine="";
+        String comm = "SELECT ime FROM oglasi WHERE id="+id+" ;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_skupine = rez.getString(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_skupine;
     }
 
 

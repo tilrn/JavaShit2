@@ -36,6 +36,7 @@ public class HomePage{
     private JButton pridruziSkupiniButton;
     private JButton ustvariSkupinoButton;
     private JLabel oglaslabel;
+    private JButton uredioglas;
     public int idu=0;
 
     public HomePage(int idmuzikanta)
@@ -52,6 +53,7 @@ public class HomePage{
         ustvariSkupinoButton.setVisible(false);
         narediOglasButton.setVisible(false);
         pridruziSkupiniButton.setVisible(false);
+        uredioglas.setVisible(false);
         setActionListeners();
         int in=Baza.IDmuzikantanull(idu);
         if(in>0){
@@ -63,6 +65,7 @@ public class HomePage{
             System.out.println(id);
             if(id>0){
                 narediOglasButton.setVisible(true);
+                uredioglas.setVisible(true);
             }
             else {
 
@@ -75,7 +78,7 @@ public class HomePage{
 
         for (int st = 0;st<i.size();st++){
             String temp = i.get(st);
-            String[] temp2 = temp.split(" ", 2);
+            String[] temp2 = temp.split("/", 2);
             String konec = temp2[0];
             System.out.println(konec);
             model.addElement(temp2[0]);
@@ -98,12 +101,25 @@ public class HomePage{
                 super.mouseClicked(e);
 
                 String selected = lista.getSelectedValue().toString();
-
+                int idso=Baza.idskupineoglasa(selected);
                 System.out.println(selected);
 
-                new SelectedOglas(selected);
+                new SelectedOglas(selected,idso);
 
             }
+        });
+        narediOglasButton.addActionListener(e -> {
+            int ids=Baza.idskupine(idu);
+            System.out.println(ids);
+            new Naredioglas(ids);
+
+        });
+        uredioglas.addActionListener(e -> {
+
+
+
+            int ids=Baza.idskupine(idu);
+            new Uredioglas(ids);
         });
 
 

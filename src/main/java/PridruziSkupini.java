@@ -11,7 +11,7 @@ public class PridruziSkupini {
     {
         JFrame frame = new JFrame("Login");
         frame.setContentPane(pridruzi);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
         frame.setSize(300, 150);
         frame.setVisible(true);
