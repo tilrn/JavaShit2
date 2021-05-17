@@ -74,7 +74,9 @@ public class Uredioglas {
         deleteButton.addActionListener(e -> {
             String zdle=comboBox1.getSelectedItem().toString();
             int ido=Baza.idoglasa(comboBox1.getSelectedItem().toString());
+            System.out.println(ido);
             comboBox1.removeItem(zdle);
+            Baza.deletepotrjen(ido);
             Baza.deleteoglas(ido);
             textField1.setVisible(false);
             textArea1.setVisible(false);

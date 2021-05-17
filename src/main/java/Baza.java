@@ -1143,7 +1143,7 @@ public class Baza {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("DELETE FROM oglasi WHERE id="+id+"");
+            stat.executeUpdate("DELETE FROM oglasi WHERE id="+id+"  ");
             System.out.println();
         }
         catch (SQLException e) {
@@ -1338,6 +1338,19 @@ public class Baza {
             System.out.println("Selectskupine() napaka " + e);
         }
         return id_muzikanta;
+    }
+    public static void deletepotrjen( int id)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("DELETE FROM potrjen WHERE oglas_id="+id+"  ");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
     }
 
 

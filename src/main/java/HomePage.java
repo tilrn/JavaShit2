@@ -41,6 +41,7 @@ public class HomePage{
     private JButton osveziButton;
     public int idu=0;
 
+
     public HomePage(int idmuzikanta)
     {
         idu=idmuzikanta;
@@ -55,6 +56,7 @@ public class HomePage{
         ustvariSkupinoButton.setVisible(false);
         narediOglasButton.setVisible(false);
         pridruziSkupiniButton.setVisible(false);
+        odziviButton.setVisible(false);
         uredioglas.setVisible(false);
         setActionListeners();
         int in=Baza.IDmuzikantanull(idu);
@@ -69,6 +71,7 @@ public class HomePage{
             if(id>0){
                 narediOglasButton.setVisible(true);
                 uredioglas.setVisible(true);
+                odziviButton.setVisible(true);
             }
             else {
 

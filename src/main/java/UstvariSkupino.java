@@ -1,6 +1,15 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UstvariSkupino {
+    String fileName = "";
+    boolean fileIfDelete;
     private JTextField textField1;
     private JTextField textField2;
     private JComboBox KrajCombo;
@@ -24,6 +33,7 @@ public class UstvariSkupino {
     private JButton koncaj;
     private JButton DeleteClani;
     private JLabel adminlabel;
+    private JButton vstaviSlikoButton;
 
     public int idu;
 
@@ -77,8 +87,40 @@ public class UstvariSkupino {
     }
     public int i = 0;
     public String ime;
-    private void setActionListeners()
-    {
+    private void setActionListeners() {
+
+
+        vstaviSlikoButton.addActionListener(e -> {
+            //Shranjevanje slike
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JPG, jpeg, and PNG Images", "jpg", "png", "jpeg");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showOpenDialog(ustvariSkupino);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                System.out.println("You chose to open this file: "
+                        + file.getName());
+                BufferedImage image;
+                try {
+                    image = ImageIO.read(file);
+                    ImageIO.write(image, "jpg",new File("src\\img\\" + file.getName()));
+                    ImageIO.write(image, "jpeg",new File("src\\img\\" + file.getName()));
+                    ImageIO.write(image, "png",new File("src\\img\\" + file.getName()));
+                    fileName = file.getName();
+                    fileIfDelete = true;
+                } catch (IOException ex) {
+                    Logger.getLogger(UstvariSkupino.class.getName()).log(Level.SEVERE, null, ex);
+
+                    //izpis errorja ce ne zberes slike
+                    JOptionPane.showMessageDialog(ustvariSkupino,
+                            "Niste izbrali slike!",
+                            "Error!",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         ustvariSkupinoButton.addActionListener(e -> {
 
             ime = textField1.getText();
@@ -87,7 +129,7 @@ public class UstvariSkupino {
             String zvrst = zvrstCombo.getSelectedItem().toString();
             int id_kraja = Baza.IDkraja(ime_kraja);
             int id_zvrsti = Baza.IDzvrsti(zvrst);
-            Baza.InsertSkupina(ime,ops,id_kraja,id_zvrsti);
+            Baza.InsertSkupina(ime, ops, id_kraja, id_zvrsti);
             claniCombo.setVisible(true);
             clan_label.setVisible(true);
             dodajButton.setVisible(true);
@@ -108,10 +150,10 @@ public class UstvariSkupino {
 
         });
         koncaj.addActionListener(e -> {
-            int st_clanov=0;
+            int st_clanov = 0;
             int ID_skupine = Baza.IDskupine(ime);
             System.out.println(ID_skupine);
-            if(clan1.getText() != "-----"){
+            if (clan1.getText() != "-----") {
 
                 String str = clan1.getText();
                 String[] random = str.split(" ", 5);
@@ -119,95 +161,90 @@ public class UstvariSkupino {
                 String priimek = random[1];
                 System.out.println(ime);
                 System.out.println(priimek);
-                Baza.InsertUporabnikSkupinaadmin(ime,priimek,ID_skupine,idu);
-                st_clanov ++;
+                Baza.InsertUporabnikSkupinaadmin(ime, priimek, ID_skupine, idu);
+                st_clanov++;
             }
-            if(clan2.getText() != "-----"){
+            if (clan2.getText() != "-----") {
                 String str = clan2.getText();
                 String[] random = str.split(" ", 5);
                 String ime = random[0];
                 String priimek = random[1];
-                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
-                st_clanov ++;
+                Baza.InsertUporabnikSkupina(ime, priimek, ID_skupine);
+                st_clanov++;
 
             }
-            if(clan3.getText() != "-----"){
+            if (clan3.getText() != "-----") {
                 String str = clan3.getText();
                 String[] random = str.split(" ", 5);
                 String ime = random[0];
                 String priimek = random[1];
-                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
-                st_clanov ++;
+                Baza.InsertUporabnikSkupina(ime, priimek, ID_skupine);
+                st_clanov++;
 
             }
-            if(clan4.getText() != "-----"){
+            if (clan4.getText() != "-----") {
                 String str = clan4.getText();
                 String[] random = str.split(" ", 5);
                 String ime = random[0];
                 String priimek = random[1];
-                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
-                st_clanov ++;
+                Baza.InsertUporabnikSkupina(ime, priimek, ID_skupine);
+                st_clanov++;
 
             }
-            if(clan5.getText() != "-----"){
+            if (clan5.getText() != "-----") {
                 String str = clan5.getText();
                 String[] random = str.split(" ", 5);
                 String ime = random[0];
                 String priimek = random[1];
-                Baza.InsertUporabnikSkupina(ime,priimek,ID_skupine);
-                st_clanov ++;
+                Baza.InsertUporabnikSkupina(ime, priimek, ID_skupine);
+                st_clanov++;
             }
             //System.out.println(st_clanov);
-            int lol=Baza.IDskupine(ime);
-            Baza.stclanov(st_clanov,lol);
+            int lol = Baza.IDskupine(ime);
+            Baza.stclanov(st_clanov, lol);
             zakluci();
 
         });
         dodajButton.addActionListener(e -> {
 
-            if (i==0)
-            {
+            if (i == 0) {
                 String clan = claniCombo.getSelectedItem().toString();
                 clan1.setText(clan);
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan);
-                new HomePage(idu);
+
 
             }
-            if (i==1)
-            {
-                String clan1=claniCombo.getSelectedItem().toString();
+            if (i == 1) {
+                String clan1 = claniCombo.getSelectedItem().toString();
                 clan2.setText(clan1);
 
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan1);
             }
-            if (i==2)
-            {
-                String clan1=claniCombo.getSelectedItem().toString();
+            if (i == 2) {
+                String clan1 = claniCombo.getSelectedItem().toString();
                 clan3.setText(clan1);
 
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan1);
             }
-            if (i==3)
-            {
-                String clan1=claniCombo.getSelectedItem().toString();
+            if (i == 3) {
+                String clan1 = claniCombo.getSelectedItem().toString();
                 clan4.setText(clan1);
 
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan1);
             }
-            if (i==4)
-            {
-                String clan1=claniCombo.getSelectedItem().toString();
+            if (i == 4) {
+                String clan1 = claniCombo.getSelectedItem().toString();
                 clan5.setText(clan1);
 
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan1);
             }
             i++;
-        } );
+        });
 
         DeleteClani.addActionListener(e -> {
             clan1.setText("-----");
@@ -218,13 +255,19 @@ public class UstvariSkupino {
             DefaultComboBoxModel mod3 = new DefaultComboBoxModel();
             mod3.addAll(Baza.ClaniIzpis());
             claniCombo.setModel(mod3);
-            i =0;
+            i = 0;
 
         });
 
-    } ;
-
     }
+}
+
+
+
+
+
+
+
 
 
 
