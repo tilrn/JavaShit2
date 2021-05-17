@@ -17,9 +17,9 @@ public class Odzivi {
         frame.setVisible(true);
 
         setActionListeners();
-
-
-
+        int id_skupine = Baza.IDskupineZIdMuzikant(MuzikantID);
+        int id_oglasa = Baza.IdOglasaZSkupino(id_skupine);
+        int id_potrjen = Baza.IdPotrjen(id_oglasa);
     }
     private void setActionListeners(){
 

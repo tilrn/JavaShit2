@@ -990,6 +990,69 @@ public class Baza {
             System.out.println("updatestclanovnapaka napaka " + e );
         }
     }
+    public static int IDskupineZIdMuzikant(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT skupina_id FROM muzikanti WHERE id = '"+ idu +"'LIMIT 1;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
+    }
+    public static int IdOglasaZSkupino(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT id FROM oglasi WHERE skupina_id = '"+ idu +"'LIMIT 1;";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
+    }
+    public static int IdPotrjen(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT id FROM potrjen WHERE oglas_id = '"+ idu +"';";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
+    }
 
 
 
