@@ -1156,7 +1156,7 @@ public class Baza {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("INSERT INTO potrjen(potrjen,opis,oglas_id,muzikant_id) VALUES(0,'"+opis+"',"+id_oglasa+","+id_muzikanta+");");
+            stat.executeUpdate("INSERT INTO potrjen(opis,oglas_id,muzikant_id) VALUES('"+opis+"',"+id_oglasa+","+id_muzikanta+");");
         }
         catch (SQLException e) {
 
@@ -1184,12 +1184,12 @@ public class Baza {
         }
         return id_skup;
     }
-    public static void Zavrni( int stclanov,int ids)
+    public static void Zavrni( String ime)
     {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("UPDATE skupine SET st_clanov = "+stclanov+" WHERE id="+ids+"");
+            stat.executeUpdate("Update potrjen SET potrjen=0 WHERE muzikant_id=(SELECT id FROM muzikanti WHERE ime='"+ ime+"')");
             System.out.println();
         }
         catch (SQLException e) {
@@ -1197,12 +1197,12 @@ public class Baza {
             System.out.println("updatestclanovnapaka napaka " + e );
         }
     }
-    public static void Potrdi( int stclanov,int ids)
+    public static void Potrdi( String ime)
     {
         try (Connection con = connect();
              Statement stat = con.createStatement())
         {
-            stat.executeUpdate("UPDATE skupine SET st_clanov = "+stclanov+" WHERE id="+ids+"");
+            stat.executeUpdate("Update potrjen SET potrjen=1 WHERE muzikant_id=(SELECT id FROM muzikanti WHERE ime='"+ ime+"')");
             System.out.println();
         }
         catch (SQLException e) {
@@ -1287,6 +1287,28 @@ public class Baza {
                 String m = rez.getString(2);
                 m += "Ω";
                 m += rez.getInt(1);
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
+    public static ArrayList<String> izpispodrditev(int ids)
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT m.ime FROM oglasi o INNER JOIN potrjen p ON p.id=p.oglas_id INNER JOIN muzikanti m ON m.id=p.muzikant_id WHERE p.potrjen IS null GROUP BY m.ime";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(1);
+
                 casi.add(m);
             }
 
