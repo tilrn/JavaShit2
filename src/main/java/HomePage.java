@@ -38,6 +38,7 @@ public class HomePage{
     private JLabel oglaslabel;
     private JButton uredioglas;
     private JButton odziviButton;
+    private JButton osveziButton;
     public int idu=0;
 
     public HomePage(int idmuzikanta)
@@ -74,20 +75,11 @@ public class HomePage{
             }
 
         }
-        ArrayList<String> i = Baza.IzpisOglasov();
-        DefaultListModel model = new DefaultListModel();
+        nigger();
 
 
-        for (int st = 0;st<i.size();st++){
-            String temp = i.get(st);
-            String[] temp2 = temp.split("/", 2);
-            String konec = temp2[0];
-            System.out.println(konec);
-            model.addElement(temp2[0]);
 
 
-        }
-        lista.setModel(model);
 
 
     }
@@ -126,12 +118,30 @@ public class HomePage{
         odziviButton.addActionListener(e -> {
             zakluciOdzivi();
         });
+        osveziButton.addActionListener(e -> {
+            nigger();
+        });
 
 
     }
     public void zakluciOdzivi(){
         new Odzivi(idu);
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(HomePage);
-        frame.dispose();
+        //frame.dispose();
     }
+    public void nigger(){
+        ArrayList<String> i = Baza.IzpisOglasov();
+        DefaultListModel model = new DefaultListModel();
+        for (int st = 0;st<i.size();st++){
+            String temp = i.get(st);
+            String[] temp2 = temp.split("/", 2);
+            String konec = temp2[0];
+            System.out.println(konec);
+            model.addElement(temp2[0]);
+
+
+        }
+        lista.setModel(model);
+    }
+
 }

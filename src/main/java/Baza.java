@@ -1299,7 +1299,7 @@ public class Baza {
     public static ArrayList<String> izpispodrditev(int ids)
     {
         ArrayList<String> casi = new ArrayList<>();
-        String comm = "SELECT m.ime FROM oglasi o INNER JOIN potrjen p ON p.id=p.oglas_id INNER JOIN muzikanti m ON m.id=p.muzikant_id WHERE p.potrjen IS null GROUP BY m.ime";
+        String comm = "SELECt m.ime FROM potrjen p INNER JOIN muzikanti m on m.id=p.muzikant_id WHERE p.potrjen IS null";
         String cas;
 
         try (Connection con = connect();
@@ -1317,6 +1317,27 @@ public class Baza {
             System.out.println("Selectskupine() napaka " + e);
         }
         return casi;
+    }
+    public static int imemuzikantovnigger(int idu)
+    {
+        int id_muzikanta = 0;
+        String comm = "SELECT id FROM potrjen WHERE oglas_id = '"+ idu +"';";
+
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                id_muzikanta = rez.getInt(1);
+
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return id_muzikanta;
     }
 
 

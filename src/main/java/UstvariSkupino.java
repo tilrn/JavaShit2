@@ -34,7 +34,7 @@ public class UstvariSkupino {
         System.out.println(idu);
         JFrame frame = new JFrame("Ustvari skupino");
         frame.setContentPane(ustvariSkupino);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setSize(600, 400);
         frame.setVisible(true);
@@ -71,7 +71,7 @@ public class UstvariSkupino {
 
     }
     public void zakluci(){
-        new HomePage(0);
+        new HomePage(idu);
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(ustvariSkupino);
         frame.dispose();
     }
@@ -171,6 +171,7 @@ public class UstvariSkupino {
                 clan1.setText(clan);
                 claniCombo.setSelectedIndex(-1);
                 claniCombo.removeItem(clan);
+                new HomePage(idu);
 
             }
             if (i==1)

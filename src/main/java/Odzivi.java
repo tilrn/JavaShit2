@@ -13,7 +13,7 @@ public class Odzivi {
         frame.setContentPane(odzivi);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.pack();
-        frame.setSize(400, 400);
+        frame.setSize(600, 400);
         frame.setVisible(true);
 
         setActionListeners();
@@ -21,6 +21,9 @@ public class Odzivi {
         int id_oglasa = Baza.IdOglasaZSkupino(id_skupine);
         int id_potrjen = Baza.IdPotrjen(id_oglasa);
 
+        DefaultComboBoxModel mod3 = new DefaultComboBoxModel();
+        mod3.addAll(Baza.izpispodrditev(MuzikantID));
+        comboBox1.setModel(mod3);
 
     }
     public void nigger(){
