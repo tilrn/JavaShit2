@@ -26,7 +26,9 @@ public class Odzivi {
         Potrdi.addActionListener(e ->{
 
 
-
+            System.out.println("Selectskupine() napaka ");
+            System.out.println("Selectskupine() napaka " + e);
+            System.out.println("Selectskupine() napaka " + e);
         });
         Zavrni.addActionListener(e ->{
 

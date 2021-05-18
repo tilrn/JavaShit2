@@ -1,4 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UstvariSkupino {
     private JTextField textField1;
@@ -24,12 +31,18 @@ public class UstvariSkupino {
     private JButton koncaj;
     private JButton DeleteClani;
     private JLabel adminlabel;
+    private JButton vstaviSlikoButton;
 
     public int idu;
 
+    String fileName = "";
+    boolean fileIfDelete;
 
     public UstvariSkupino(int iduporabnika)
     {
+
+
+
         idu=iduporabnika;
         System.out.println(idu);
         JFrame frame = new JFrame("Ustvari skupino");
@@ -220,6 +233,38 @@ public class UstvariSkupino {
             i =0;
 
         });
+
+        vstaviSlikoButton.addActionListener(e -> {
+            //Shranjevanje slike
+            JFileChooser chooser = new JFileChooser();
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "JPG, jpeg, and PNG Images", "jpg", "png", "jpeg");
+            chooser.setFileFilter(filter);
+            int returnVal = chooser.showOpenDialog(ustvariSkupino);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+                System.out.println("You chose to open this file: "
+                        + file.getName());
+                BufferedImage image;
+                try {
+                    image = ImageIO.read(file);
+                    ImageIO.write(image, "jpg",new File("src\\img\\" + file.getName()));
+                    ImageIO.write(image, "jpeg",new File("src\\img\\" + file.getName()));
+                    ImageIO.write(image, "png",new File("src\\img\\" + file.getName()));
+                    fileName = file.getName();
+                    fileIfDelete = true;
+                } catch (IOException ex) {
+                    Logger.getLogger(UstvariSkupino.class.getName()).log(Level.SEVERE, null, ex);
+
+                    //izpis errorja ce ne zberes slike
+                    JOptionPane.showMessageDialog(ustvariSkupino,
+                            "Niste izbrali slike!",
+                            "Error!",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
 
     } ;
 
