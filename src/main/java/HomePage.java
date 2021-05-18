@@ -39,6 +39,7 @@ public class HomePage{
     private JButton uredioglas;
     private JButton odziviButton;
     private JButton osveziButton;
+    private JButton skupinabutton;
     public int idu=0;
 
 
@@ -58,6 +59,7 @@ public class HomePage{
         pridruziSkupiniButton.setVisible(false);
         odziviButton.setVisible(false);
         uredioglas.setVisible(false);
+        skupinabutton.setVisible(false);
         setActionListeners();
         int in=Baza.IDmuzikantanull(idu);
         System.out.println(in);
@@ -68,10 +70,12 @@ public class HomePage{
         else{
             int id=Baza.IDmuzikantanulladmin(idu);
             System.out.println(id);
+            //skupinabutton.setVisible(true);
             if(id>0){
                 narediOglasButton.setVisible(true);
                 uredioglas.setVisible(true);
                 odziviButton.setVisible(true);
+                //skupinabutton.setVisible(true);
             }
             else {
 
@@ -123,6 +127,10 @@ public class HomePage{
         });
         osveziButton.addActionListener(e -> {
             nigger();
+        });
+        skupinabutton.addActionListener(e -> {
+            int ids=Baza.idskupine(idu);
+            new Skupina(ids);
         });
 
 

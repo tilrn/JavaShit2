@@ -41,6 +41,8 @@ public class Odzivi {
         Potrdi.addActionListener(e ->{
             String ime=comboBox1.getSelectedItem().toString();
             Baza.Potrdi(ime);
+            int id_skupine = Baza.IDskupineZIdMuzikant(MuzikantID);
+            Baza.dodajvskupino(id_skupine,ime);
             nigger();
 
 

@@ -1373,6 +1373,41 @@ public class Baza {
         }
         return id_skupine;
     }
+    public static ArrayList<String> izpisclanovvskupini(int ids)
+    {
+        ArrayList<String> casi = new ArrayList<>();
+        String comm = "SELECT m.ime,m.priimek from muzikanti m INNER JOIN skupine s ON s.id=m.skupina_Id WHERE s.id="+ids+"";
+        String cas;
+
+        try (Connection con = connect();
+             Statement stat = con.createStatement();
+             ResultSet rez = stat.executeQuery(comm)) {
+
+            while (rez.next()) {
+                String m = rez.getString(1);
+
+                casi.add(m);
+            }
+
+        } catch (SQLException e) {
+
+            System.out.println("Selectskupine() napaka " + e);
+        }
+        return casi;
+    }
+    public static void dodajvskupino(int ids, String ime)
+    {
+        try (Connection con = connect();
+             Statement stat = con.createStatement())
+        {
+            stat.executeUpdate("update muzikanti SET id_skupine="+ids+" WHERE ime='"+ime+"'");
+            System.out.println();
+        }
+        catch (SQLException e) {
+
+            System.out.println("updatestclanovnapaka napaka " + e );
+        }
+    }
 
 
 
